@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using Unity.Netcode;
-public class PlayerController : NetworkBehaviour
+public class PL_Movement_Controller : NetworkBehaviour
 {
     public GameObject Player;
     public GameObject playerCamera;
@@ -11,8 +11,15 @@ public class PlayerController : NetworkBehaviour
     public float lookXLimit = 45.0f;
     public Rigidbody rb; [SerializeField]
 
+    PL_Inv_Controller inventoryController;
 
-    public float Speedcap = 2f;
+
+
+    float StartingMovementSpeedCoefficient = 1f; [SerializeField]
+    public float CurrentMovementSpeedCoefficient = 1f;
+
+    public float BareHandedMovespeedMultiplier = 1.15f;
+
     public float MovementSpeed = 5f;
     float rotationX = 0;
     // Start is called before the first frame update
@@ -20,8 +27,12 @@ public class PlayerController : NetworkBehaviour
     {
         if(IsLocalPlayer != true)
         {
+            CurrentMovementSpeedCoefficient = StartingMovementSpeedCoefficient;
+
             this.enabled = false;
         }
+        inventoryController = GetComponent<PL_Inv_Controller>();
+
         //player = this.GetComponent<GameObject>();
     }
 
@@ -34,30 +45,24 @@ public class PlayerController : NetworkBehaviour
     void PlayerMovement()
     {
 
-        if(Input.GetAxis("Vertical") > 0)
-        {
-            rb.AddRelativeForce(Input.GetAxis("Vertical") * MovementSpeed * Vector3.forward);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddRelativeForce(-Input.GetAxis("Vertical") * MovementSpeed * -Vector3.forward);
-        }
+        float vertical;
+        float horizontal;
 
+        vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxis("Horizontal");
+        rb.velocity = (transform.forward * vertical) * (MovementSpeed * CurrentMovementSpeedCoefficient) * Time.fixedDeltaTime + (transform.right * horizontal) * (MovementSpeed * CurrentMovementSpeedCoefficient) * Time.fixedDeltaTime;
 
-
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            rb.AddRelativeForce(Input.GetAxis("Horizontal") * MovementSpeed * -Vector3.left);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddRelativeForce(-Input.GetAxis("Horizontal") * MovementSpeed * Vector3.left);
-        }
-
-
-
-        //rb.AddForce(new Vector3(Input.GetAxis("Horizontal") * MovementSpeed,0, Input.GetAxis("Vertical") * MovementSpeed),ForceMode.Acceleration);
     }
+
+
+    void InventoryBareHandedCheck()
+    {
+        if (inventoryController.SelectedSlot == 0 || (inventoryController.SelectedSlot == 1 && inventoryController.Slot1 == null) || (inventoryController.SelectedSlot == 2 && inventoryController.Slot2 == null))
+        {
+            CurrentMovementSpeedCoefficient = BareHandedMovespeedMultiplier;
+        }
+    }
+
 
     void CameraRotation()
     {
