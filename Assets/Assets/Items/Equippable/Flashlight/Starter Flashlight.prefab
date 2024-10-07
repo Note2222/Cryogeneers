@@ -298,6 +298,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7567013753132037819}
+  - component: {fileID: -7452341077150385597}
+  - component: {fileID: -4057941443190336181}
   m_Layer: 0
   m_Name: Starter Flashlight
   m_TagString: Untagged
@@ -321,3 +323,35 @@ Transform:
   - {fileID: 3421322795701762871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7452341077150385597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829010437114254625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e97fba03aca8549a83a8b83d71a89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxBatteryLife: 60
+  IsOn: 1
+  LightSource: {fileID: 1933233724564181855}
+  HeldObjectcontainer: {fileID: 0}
+--- !u!114 &-4057941443190336181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829010437114254625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daeaeb606f0a8f340a39e21187dcf1e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsObtainable: 1
+  playerinventoryobject: {fileID: 11400000, guid: ce3e6b20229278747ac756f05dfc9ead, type: 2}
+  MaxHealth: 60
+  Health: 60

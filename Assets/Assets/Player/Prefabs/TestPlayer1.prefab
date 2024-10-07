@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &836616073701977017
 Transform:
   m_ObjectHideFlags: 0
@@ -382,9 +382,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d22aa4ae51c2d478f88442f2333563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 4288522980319448143}
   Slot0: {fileID: 0}
+  slot0health: 0
   Slot1: {fileID: 11400000, guid: ce3e6b20229278747ac756f05dfc9ead, type: 2}
+  slot1health: 0
   Slot2: {fileID: 0}
+  slot2health: 0
   HoldPosition: {fileID: 1842715335827423810}
   SelectedSlot: 0
 --- !u!1 &4403169932834291043
@@ -927,6 +931,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0e9b69c6f15bf2f43b0ed790b1549aa6, type: 3}
       propertyPath: m_Name
       value: untitled
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0e9b69c6f15bf2f43b0ed790b1549aa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 public class PL_Movement_Controller : NetworkBehaviour
 {
     public GameObject Player;
@@ -25,7 +22,7 @@ public class PL_Movement_Controller : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(IsLocalPlayer != true)
+        if (IsLocalPlayer != true)
         {
             CurrentMovementSpeedCoefficient = StartingMovementSpeedCoefficient;
 
@@ -40,6 +37,7 @@ public class PL_Movement_Controller : NetworkBehaviour
     {
         CameraRotation();
         PlayerMovement();
+        //PickUpItem();
     }
 
     void PlayerMovement()
@@ -53,6 +51,8 @@ public class PL_Movement_Controller : NetworkBehaviour
         rb.velocity = (transform.forward * vertical) * (MovementSpeed * CurrentMovementSpeedCoefficient) * Time.fixedDeltaTime + (transform.right * horizontal) * (MovementSpeed * CurrentMovementSpeedCoefficient) * Time.fixedDeltaTime;
 
     }
+
+
 
 
     void InventoryBareHandedCheck()
@@ -70,10 +70,10 @@ public class PL_Movement_Controller : NetworkBehaviour
 
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, Mathf.Clamp(0,0,0), Mathf.Clamp(0, 0, 0));
-        
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, Mathf.Clamp(0, 0, 0), Mathf.Clamp(0, 0, 0));
+
         transform.rotation *= Quaternion.Euler(Mathf.Clamp(0, 0, 0), Input.GetAxis("Mouse X") * lookSpeed, Mathf.Clamp(0, 0, 0));
 
-        
+
     }
 }
